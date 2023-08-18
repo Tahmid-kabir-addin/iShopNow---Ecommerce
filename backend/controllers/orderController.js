@@ -77,6 +77,26 @@ exports.getAllOrders = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// get all Orders -- Supplier
+exports.getAllOrdersSupplier = catchAsyncErrors(async (req, res, next) => {
+  const products = await Product.find({ user: req.user._id })
+  const productIds = products.map(product => product._id)
+  // console.log(productIds);
+  const orders = await Order.find({ 'orderItems.product': { $in: productIds }});
+
+  let totalAmount = 0;
+
+  orders.forEach((order) => {
+    totalAmount += order.totalPrice;
+  });
+
+  res.status(200).json({
+    success: true,
+    totalAmount,
+    orders,
+  });
+});
+
 // update Order Status -- Admin
 exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
   const order = await Order.findById(req.params.id);

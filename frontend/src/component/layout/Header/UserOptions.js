@@ -43,8 +43,21 @@ const UserOptions = ({ user }) => {
     });
   }
 
+  if (user.role === "supplier") {
+    
+    options.unshift({
+      icon: <DashboardIcon />,
+      name: "Dashboard",
+      func: supplierdashboard,
+    });
+  }
+
   function dashboard() {
     history.push("/admin/dashboard");
+  }
+
+  function supplierdashboard() {
+    history.push("/supplier/dashboard");
   }
 
   function orders() {

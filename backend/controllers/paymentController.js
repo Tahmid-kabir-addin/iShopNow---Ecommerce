@@ -7,10 +7,10 @@ exports.processPayment = catchAsyncErrors(async (req, res, next) => {
     amount: req.body.amount,
     currency: "inr",
     metadata: {
-      company: "Ecommerce",
+      company: "iShopNow",
     },
   });
-
+  // console.log(myPayment);
   res
     .status(200)
     .json({ success: true, client_secret: myPayment.client_secret });

@@ -9,7 +9,7 @@ import AddIcon from "@material-ui/icons/Add";
 import ImportExportIcon from "@material-ui/icons/ImportExport";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import PeopleIcon from "@material-ui/icons/People";
+// import PeopleIcon from "@material-ui/icons/People";
 import RateReviewIcon from "@material-ui/icons/RateReview";
 
 const Sidebar = () => {
@@ -19,7 +19,7 @@ const Sidebar = () => {
         <img src={logo} alt="Ecommerce" style={{width:"150px",marginLeft:"30px", marginTop:"40px",backgroundColor:""
       , borderRadius:"0%"}}/>
       </Link>
-      <Link to="/admin/dashboard">
+      <Link to="/supplier/dashboard">
         <p>
           <DashboardIcon /> Dashboard
         </p>
@@ -30,28 +30,28 @@ const Sidebar = () => {
           defaultExpandIcon={<ImportExportIcon />}
         >
           <TreeItem nodeId="1" label="Products">
-            <Link to="/admin/products">
+            <Link to="/supplier/products">
               <TreeItem nodeId="2" label="All" icon={<PostAddIcon />} />
             </Link>
 
-            <Link to="/admin/product">
+            <Link to="/supplier/product">
               <TreeItem nodeId="3" label="Create" icon={<AddIcon />} />
             </Link>
           </TreeItem>
         </TreeView>
       </Link>
-      <Link to="/admin/orders">
+      <Link to="/supplier/orders">
         <p>
           <ListAltIcon />
           Orders
         </p>
       </Link>
-      <Link to="/admin/users">
+      {/* <Link to="/admin/users">
         <p>
           <PeopleIcon /> Users
         </p>
-      </Link>
-      <Link to="/admin/reviews">
+      </Link> */}
+      <Link to="/supplier/reviews">
         <p>
           <RateReviewIcon />
           Reviews

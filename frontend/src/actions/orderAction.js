@@ -75,6 +75,22 @@ export const getAllOrders = () => async (dispatch) => {
   }
 };
 
+// Get All Orders (Supplier)
+export const getAllOrdersSupplier = () => async (dispatch) => {
+  try {
+    dispatch({ type: ALL_ORDERS_REQUEST });
+
+    const { data } = await axios.get("/api/v1/supplier/orders");
+    // console.log(data);
+    dispatch({ type: ALL_ORDERS_SUCCESS, payload: data.orders });
+  } catch (error) {
+    dispatch({
+      type: ALL_ORDERS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
 // Update Order
 export const updateOrder = (id, order) => async (dispatch) => {
   try {

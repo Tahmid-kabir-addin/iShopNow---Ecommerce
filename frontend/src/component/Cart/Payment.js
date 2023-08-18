@@ -61,7 +61,7 @@ const Payment = ({ history }) => {
         paymentData,
         config
       );
-
+      // console.log(data);
       const client_secret = data.client_secret;
 
       if (!stripe || !elements) return;
@@ -82,7 +82,7 @@ const Payment = ({ history }) => {
           },
         },
       });
-
+      // console.log(result);
       if (result.error) {
         payBtn.current.disabled = false;
 

@@ -39,6 +39,14 @@ import ProcessOrder from "./component/Admin/ProcessOrder";
 import UsersList from "./component/Admin/UsersList";
 import UpdateUser from "./component/Admin/UpdateUser";
 import ProductReviews from "./component/Admin/ProductReviews";
+
+import SupplierDashboard from "./component/Supplier/Dashboard.js";
+import SupplierProductList from "./component/Supplier/ProductList.js";
+import SupplierNewProduct from "./component/Supplier/NewProduct.js";
+import SupplierUpdateProduct from "./component/Supplier/UpdateProduct";
+import SupplierProductReviews from "./component/Supplier/ProductReviews";
+import SupplierOrderList from "./component/Supplier/OrderList";
+
 import Contact from "./component/layout/Contact/Contact";
 import About from "./component/layout/About/About";
 import NotFound from "./component/layout/Not Found/NotFound";
@@ -46,6 +54,7 @@ import NotFound from "./component/layout/Not Found/NotFound";
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   // console.log(user.avatar)
+  // const [stripeApiKey, setStripeApiKey] = useState("pk_test_51NOf9tKGznfQHStkNSdxjh49tg2aOvhufKAGSb3eJuxQ0Lagre3q6OUciiO3KnkRQj8kAG6SPUqKHB9UTAkrHafk00jCMsFgw8");
   const [stripeApiKey, setStripeApiKey] = useState("");
 
   async function getStripeApiKey() {
@@ -177,6 +186,45 @@ function App() {
           path="/admin/reviews"
           isAdmin={true}
           component={ProductReviews}
+        />
+        <ProtectedRoute
+          exact
+          path="/supplier/orders"
+          isSupplier={true}
+          component={SupplierOrderList}
+        />
+        <ProtectedRoute
+          exact
+          path="/supplier/reviews"
+          isSupplier={true}
+          component={SupplierProductReviews}
+        />
+
+        <ProtectedRoute
+          isSupplier={true}
+          isAdmin={false}
+          exact
+          path="/supplier/dashboard"
+          component={SupplierDashboard}
+        />
+        <ProtectedRoute
+          exact
+          path="/supplier/products"
+          isSupplier={true}
+          component={SupplierProductList}
+        />
+        <ProtectedRoute
+          exact
+          path="/supplier/product"
+          isSupplier={true}
+          component={SupplierNewProduct}
+        />
+
+        <ProtectedRoute
+          exact
+          path="/supplier/product/:id"
+          isSupplier={true}
+          component={SupplierUpdateProduct}
         />
 
         <Route

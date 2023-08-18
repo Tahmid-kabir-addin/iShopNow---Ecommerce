@@ -99,7 +99,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   // console.log(resetPasswordUrl);
 
   const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
-  console.log(user.email);
+  // console.log(user.email);
   try {
     await sendEmail({
       email: user.email,

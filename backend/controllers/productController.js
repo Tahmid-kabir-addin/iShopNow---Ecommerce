@@ -4,8 +4,9 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apifeatures");
 const cloudinary = require("cloudinary");
 
-// Create Product -- Admin
+// Create Product -- Admin -- Supplier
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
+  console.log(req.body);
   let images = [];
   if (typeof req.body.images === "string") {
     images.push(req.body.images);
@@ -38,6 +39,7 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+
 // Get All Product
 exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   const resultPerPage = 8;
@@ -66,11 +68,22 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
 
 // Get All Product (Admin)
 exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
-  console.log('hi');
+  // console.log('hi');
   const products = await Product.find();
   // console.log(products);
   res.status(200).json({
     success: true,  
+    products,
+  });
+});
+
+// Get All Product (Supplier)
+exports.getSupplierProducts = catchAsyncErrors(async (req, res, next) => {
+  // console.log(req.user._id);
+  const products = await Product.find({user: req.user._id});
+  // console.log(products);
+  res.status(200).json({
+    success: true,
     products,
   });
 });
@@ -89,8 +102,7 @@ exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Update Product -- Admin
-
+// Update Product -- Admin -- Supplier
 exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
 

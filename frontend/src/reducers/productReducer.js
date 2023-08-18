@@ -5,6 +5,9 @@ import {
   ADMIN_PRODUCT_REQUEST,
   ADMIN_PRODUCT_SUCCESS,
   ADMIN_PRODUCT_FAIL,
+  SUPPLIER_PRODUCT_REQUEST,
+  SUPPLIER_PRODUCT_SUCCESS,
+  SUPPLIER_PRODUCT_FAIL,
   NEW_PRODUCT_REQUEST,
   NEW_PRODUCT_SUCCESS,
   NEW_PRODUCT_FAIL,
@@ -38,6 +41,7 @@ export const productsReducer = (state = { products: [] }, action) => {
   switch (action.type) {
     case ALL_PRODUCT_REQUEST:
     case ADMIN_PRODUCT_REQUEST:
+    case SUPPLIER_PRODUCT_REQUEST:
       return {
         loading: true,
         products: [],
@@ -52,12 +56,14 @@ export const productsReducer = (state = { products: [] }, action) => {
       };
 
     case ADMIN_PRODUCT_SUCCESS:
+    case SUPPLIER_PRODUCT_SUCCESS:
       return {
         loading: false,
         products: action.payload,
       };
     case ALL_PRODUCT_FAIL:
     case ADMIN_PRODUCT_FAIL:
+    case SUPPLIER_PRODUCT_FAIL:
       return {
         loading: false,
         error: action.payload,
