@@ -111,3 +111,42 @@
     font: 300 0.9rem "Roboto";
   }
 }
+
+/* dashboard.css */
+
+.dashboardHeading {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: tomato;
+  /* Customize the color */
+}
+
+.chartTitle {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+  /* margin-left: 50px; */
+  padding-left: 110px;
+  /* Customize the color */
+}
+
+.chartTitleLine {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+  /* margin-left: 50px; */
+  padding-left: 330px;
+  /* Customize the color */
+}
+
+.line {
+  margin-top: 50px;
+}
+.doughnutChart {
+  margin-top: 50px;
+  /* Adjust this value to lower or raise the chart */
+}
+
+.doughnut {
+  margin-top: 20px;
+}

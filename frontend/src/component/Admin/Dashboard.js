@@ -37,7 +37,8 @@ const Dashboard = () => {
   let totalAmount = 0;
   orders &&
     orders.forEach((item) => {
-      totalAmount += item.totalPrice;
+      if (item.orderStatus === 'Delivered')
+        totalAmount += item.totalPrice;
     });
 
   const lineState = {

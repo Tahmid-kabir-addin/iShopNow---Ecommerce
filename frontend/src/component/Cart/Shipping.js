@@ -28,8 +28,8 @@ const Shipping = ({ history }) => {
   const shippingSubmit = (e) => {
     e.preventDefault();
 
-    if (phoneNo.length < 10 || phoneNo.length > 10) {
-      alert.error("Phone Number should be 10 digits Long");
+    if (phoneNo.length < 11 || phoneNo.length > 11) {
+      alert.error("Phone Number should be 11 digits Long");
       return;
     }
     dispatch(

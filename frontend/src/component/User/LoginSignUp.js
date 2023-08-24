@@ -8,8 +8,21 @@ import FaceIcon from "@material-ui/icons/Face";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, login, register } from "../../actions/userAction";
 import { useAlert } from "react-alert";
+import logo from "../../images/logo1.png"
 
 const LoginSignUp = ({ history, location }) => {
+  // newly added 
+  const [isSignUpMode, setIsSignUpMode] = useState(false);
+
+  const handleSignInClick = () => {
+    setIsSignUpMode(false);
+  };
+
+  const handleSignUpClick = () => {
+    setIsSignUpMode(true);
+  };
+
+  // to Here
   const dispatch = useDispatch();
   const alert = useAlert();
 
@@ -105,90 +118,116 @@ const LoginSignUp = ({ history, location }) => {
         <Loader />
       ) : (
         <Fragment>
-          <div className="LoginSignUpContainer">
-            <div className="LoginSignUpBox">
-              <div>
-                <div className="login_signUp_toggle">
-                  <p onClick={(e) => switchTabs(e, "login")}>LOGIN</p>
-                  <p onClick={(e) => switchTabs(e, "register")}>REGISTER</p>
-                </div>
-                <button ref={switcherTab}></button>
-              </div>
-              <form className="loginForm" ref={loginTab} onSubmit={loginSubmit}>
-                <div className="loginEmail">
-                  <MailOutlineIcon />
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    required
-                    value={loginEmail}
-                    onChange={(e) => setLoginEmail(e.target.value)}
-                  />
-                </div>
-                <div className="loginPassword">
-                  <LockOpenIcon />
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    required
-                    value={loginPassword}
-                    onChange={(e) => setLoginPassword(e.target.value)}
-                  />
-                </div>
-                <Link to="/password/forgot">Forget Password ?</Link>
-                <input type="submit" value="Login" className="loginBtn" />
-              </form>
-              <form
-                className="signUpForm"
-                ref={registerTab}
-                encType="multipart/form-data"
-                onSubmit={registerSubmit}
-              >
-                <div className="signUpName">
-                  <FaceIcon />
-                  <input
-                    type="text"
-                    placeholder="Name"
-                    required
-                    name="name"
-                    value={name}
-                    onChange={registerDataChange}
-                  />
-                </div>
-                <div className="signUpEmail">
-                  <MailOutlineIcon />
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    required
-                    name="email"
-                    value={email}
-                    onChange={registerDataChange}
-                  />
-                </div>
-                <div className="signUpPassword">
-                  <LockOpenIcon />
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    required
-                    name="password"
-                    value={password}
-                    onChange={registerDataChange}
-                  />
-                </div>
+          <div className={`pseudo_container ${isSignUpMode ? 'sign-up-mode' : ''}`}>
+            <div className="forms-container">
+              <div className="signin-signup">
+                <form className={`sign-in-form ${isSignUpMode ? 'hidden' : ''}`} ref={loginTab} onSubmit={loginSubmit}>
+                  <h2 className="title">Login</h2>
+                  <div className="input-field">
+                    <MailOutlineIcon />
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      required
+                      value={loginEmail}
+                      onChange={(e) => setLoginEmail(e.target.value)}
+                    />
+                  </div>
+                  <div className="input-field">
+                    <LockOpenIcon />
+                    <input
+                      type="password"
+                      placeholder="Password"
+                      required
+                      value={loginPassword}
+                      onChange={(e) => setLoginPassword(e.target.value)}
+                    />
+                  </div>
+                  <Link to="/password/forgot">Forgot Password?</Link>
+                  <input type="submit" value="Login" className="btn solid" />
+                </form>
 
-                <div id="registerImage">
-                  <img src={avatarPreview} alt="Avatar Preview" />
-                  <input
-                    type="file"
-                    name="avatar"
-                    accept="image/*"
-                    onChange={registerDataChange}
-                  />
+
+
+                <form
+                  className="sign-up-form"
+                  ref={registerTab}
+                  encType="multipart/form-data"
+                  onSubmit={registerSubmit}
+                >
+                  <h2 className="title">Register</h2>
+                  <div className="input-field">
+                    <FaceIcon />
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      required
+                      name="name"
+                      value={name}
+                      onChange={registerDataChange}
+                    />
+                  </div>
+                  <div className="input-field">
+                    <MailOutlineIcon />
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      required
+                      name="email"
+                      value={email}
+                      onChange={registerDataChange}
+                    />
+                  </div>
+                  <div className="input-field">
+                    <LockOpenIcon />
+                    <input
+                      type="password"
+                      placeholder="Password"
+                      required
+                      name="password"
+                      value={password}
+                      onChange={registerDataChange}
+                    />
+                  </div>
+                  <div className="input-field" id="registerImage">
+                    <img src={avatarPreview} alt="Avatar Preview" />
+                    <input
+                      type="file"
+                      name="avatar"
+                      accept="image/*"
+                      onChange={registerDataChange}
+                    />
+                  </div>
+                  <input type="submit" className="btn" value="Register" />
+                </form>
+              </div>
+            </div>
+
+            <div className="panels-container">
+              <div className="panel left-panel">
+                <div className="content">
+                  <h2>Welcome to</h2>
+                  <h1>iShopNow</h1>
+                  <p>
+                    It is a place where you will find all your belongings!
+                  </p>
+                  <button className="btn transparent" onClick={handleSignUpClick}>
+                    Register
+                  </button>
                 </div>
-                <input type="submit" value="Register" className="signUpBtn" />
-              </form>
+              </div>
+              <div className="panel right-panel">
+                <div className="content">
+                  <h3>Already have an account?</h3>
+                  <p>
+                    If you don't have an account you can sign-up the form to join this Marketplace.
+                  </p>
+                  <button className="btn transparent" onClick={handleSignInClick}>
+                    Login
+                  </button>
+                </div>
+                <img src="register.svg" className="image" alt="" />
+              </div>
             </div>
           </div>
         </Fragment>

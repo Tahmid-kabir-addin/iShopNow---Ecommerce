@@ -35,7 +35,7 @@ router
 //              authorizeRoles("supplier") (checks if user has admin role)
 router
   .route("/supplier/products")
-  .get(isAuthenticatedUser, authorizeRoles("supplier"), getSupplierProducts);
+  .get(isAuthenticatedUser, authorizeRoles("supplier"), getAdminProducts);
 
 // Route: POST /admin/product/new
 // Description: Creates a new product

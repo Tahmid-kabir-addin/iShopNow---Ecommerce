@@ -71,19 +71,21 @@ const Popup = styled.div`
 // Styles
 const StyledContactForm = styled.div`
   width: 30%;
-  margin-left: 500px;
+  margin-left: 450px;
   padding-top: 100px;
   h2 {
     text-align: center;
     margin-bottom: 20px;
+    padding-left: 200px;
     font-size: 30px;
     font-family: roboto;
   }
   hr {
     width: 40px;
-    margin: 10px auto;
+    // margin: 10px auto;
     border: 2px solid #ccc;
     color: black;
+    margin-left: 300px;
   }
   form {
     display: flex;
@@ -91,6 +93,7 @@ const StyledContactForm = styled.div`
     flex-direction: column;
     width: 100%;
     font-size: 16px;
+    margin-left: 300;
 
     input {
       width: 100%;

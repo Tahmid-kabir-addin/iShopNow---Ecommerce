@@ -29,12 +29,13 @@ const SupplierNewProduct = ({ history }) => {
 
   const categories = [
     "Laptop",
-    "Footwear",
-    "Bottom",
-    "Tops",
-    "Attire",
+    "Desktop",
+    "Monitor",
+    "Office Equipment",
+    "Accessories",
     "Camera",
-    "SmartPhones",
+    "Phone",
+    "Gaming",
   ];
 
   useEffect(() => {

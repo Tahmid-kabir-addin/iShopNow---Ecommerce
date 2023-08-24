@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { logout } from "../../../actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
+import { StylesProvider } from "@material-ui/core/styles";
 
 const UserOptions = ({ user }) => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -44,7 +45,7 @@ const UserOptions = ({ user }) => {
   }
 
   if (user.role === "supplier") {
-    
+
     options.unshift({
       icon: <DashboardIcon />,
       name: "Dashboard",

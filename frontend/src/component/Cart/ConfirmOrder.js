@@ -1,15 +1,17 @@
 import React, { Fragment } from "react";
 import CheckoutSteps from "../Cart/CheckoutSteps";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MetaData from "../layout/MetaData";
 import "./ConfirmOrder.css";
 import { Link } from "react-router-dom";
 import { Typography } from "@material-ui/core";
+import { createOrder, clearErrors } from "../../actions/orderAction";
+import { v4 as uuidv4 } from "uuid";
 
 const ConfirmOrder = ({ history }) => {
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
-
+  const dispatch = useDispatch()
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.quantity * item.price,
     0
@@ -22,18 +24,36 @@ const ConfirmOrder = ({ history }) => {
   const totalPrice = subtotal + tax + shippingCharges;
 
   const address = `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.state}, ${shippingInfo.pinCode}, ${shippingInfo.country}`;
+  
+  const order = {
+    shippingInfo,
+    orderItems: cartItems,
+    itemsPrice: subtotal,
+    taxPrice: tax,
+    shippingPrice: shippingCharges,
+    totalPrice: totalPrice
+  }
+  const pid = uuidv4();
 
   const proceedToPayment = () => {
-    const data = {
-      subtotal,
-      shippingCharges,
-      tax,
-      totalPrice,
-    };
+    // const data = {
+    //   subtotal,
+    //   shippingCharges,
+    //   tax,
+    //   totalPrice,
+    // };
 
-    sessionStorage.setItem("orderInfo", JSON.stringify(data));
+    order.paymentInfo = {
+      id: pid,
+      status: 'NOT PAID',
+    }
+    console.log('hello');
 
-    history.push("/process/payment");
+    // sessionStorage.setItem("orderInfo", JSON.stringify(data));
+
+    dispatch(createOrder(order))
+
+    history.push("/success");
   };
 
   return (
@@ -103,8 +123,10 @@ const ConfirmOrder = ({ history }) => {
               </p>
               <span>৳{totalPrice}</span>
             </div>
-
-            <button onClick={proceedToPayment}>Proceed To Payment</button>
+            <p className="cashOnDeliveryWarning">
+              Please Note: We only accept cash on delivery.
+            </p>
+            <button onClick={proceedToPayment}>Confirm Order</button>
           </div>
         </div>
       </div>

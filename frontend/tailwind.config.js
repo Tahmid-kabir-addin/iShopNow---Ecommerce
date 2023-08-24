@@ -4,6 +4,16 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const extendoverline = {
+        '.overline': {
+          'textDecoration': 'overline',
+          'text-decoration-color': 'tomato',
+        },
+      }
+      addUtilities(extendoverline)
+    }
+  ],
 }
 

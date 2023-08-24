@@ -19,6 +19,9 @@ import "./processOrder.css";
 const ProcessOrder = ({ history, match }) => {
   const { order, error, loading } = useSelector((state) => state.orderDetails);
   const { error: updateError, isUpdated } = useSelector((state) => state.order);
+  if(order?.orderStatus === 'Delivered') order.paymentInfo.status = 'succeeded'
+    
+
 
   const updateOrderSubmitHandler = (e) => {
     e.preventDefault();
@@ -34,7 +37,6 @@ const ProcessOrder = ({ history, match }) => {
   const alert = useAlert();
 
   const [status, setStatus] = useState("");
-
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -48,7 +50,6 @@ const ProcessOrder = ({ history, match }) => {
       alert.success("Order Updated Successfully");
       dispatch({ type: UPDATE_ORDER_RESET });
     }
-
     dispatch(getOrderDetails(match.params.id));
   }, [dispatch, alert, error, match.params.id, isUpdated, updateError]);
 
@@ -93,6 +94,11 @@ const ProcessOrder = ({ history, match }) => {
                   <Typography>Payment</Typography>
                   <div className="orderDetailsContainerBox">
                     <div>
+                      <p>
+                        Cash On Delivery
+                      </p>
+                    </div>
+                    <div>
                       <p
                         className={
                           order.paymentInfo &&
@@ -130,7 +136,7 @@ const ProcessOrder = ({ history, match }) => {
                   </div>
                 </div>
                 <div className="confirmCartItems">
-                  <Typography>Your Cart Items:</Typography>
+                  <Typography>Ordered Items:</Typography>
                   <div className="confirmCartItemsContainer">
                     {order.orderItems &&
                       order.orderItems.map((item) => (
@@ -171,6 +177,7 @@ const ProcessOrder = ({ history, match }) => {
                       {order.orderStatus === "Shipped" && (
                         <option value="Delivered">Delivered</option>
                       )}
+
                     </select>
                   </div>
 

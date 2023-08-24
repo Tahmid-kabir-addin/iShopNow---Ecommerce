@@ -33,7 +33,7 @@ export const createOrder = (order) => async (dispatch) => {
       },
     };
     const { data } = await axios.post("/api/v1/order/new", order, config);
-
+    console.log(data);
     dispatch({ type: CREATE_ORDER_SUCCESS, payload: data });
   } catch (error) {
     dispatch({

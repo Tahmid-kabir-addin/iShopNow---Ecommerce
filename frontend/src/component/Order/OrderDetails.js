@@ -13,6 +13,7 @@ const OrderDetails = ({ match }) => {
 
   const dispatch = useDispatch();
   const alert = useAlert();
+  if (order?.orderStatus === 'Delivered') order.paymentInfo.status = 'succeeded'
 
   useEffect(() => {
     if (error) {
@@ -56,6 +57,11 @@ const OrderDetails = ({ match }) => {
               </div>
               <Typography>Payment</Typography>
               <div className="orderDetailsContainerBox">
+                <div>
+                  <p>
+                    Cash On Delivery
+                  </p>
+                </div>
                 <div>
                   <p
                     className={

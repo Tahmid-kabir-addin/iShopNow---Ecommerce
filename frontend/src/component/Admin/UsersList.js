@@ -74,7 +74,7 @@ const UsersList = ({ history }) => {
       cellClassName: (params) => {
         return params.getValue(params.id, "role") === "admin"
           ? "greenColor"
-          : "redColor";
+          : params.getValue(params.id, "role") === "staff" ? "redColor":'blueColor';
       },
     },
 
@@ -111,7 +111,7 @@ const UsersList = ({ history }) => {
     users.forEach((item) => {
       rows.push({
         id: item._id,
-        role: item.role,
+        role: item.role === 'supplier' ? 'staff': item.role,
         email: item.email,
         name: item.name,
       });

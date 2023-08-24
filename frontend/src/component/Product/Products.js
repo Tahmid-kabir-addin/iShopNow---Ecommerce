@@ -11,13 +11,15 @@ import Typography from "@material-ui/core/Typography";
 import MetaData from "../layout/MetaData";
 
 const categories = [
+  "All",
   "Laptop",
-  "Footwear",
-  "Bottom",
-  "Tops",
-  "Attire",
+  "Desktop",
+  "Monitor",
+  "Office Equipment",
+  "Accessories",
   "Camera",
-  "SmartPhones",
+  "Phone",
+  "Gaming",
 ];
 
 const Products = ({ match }) => {
@@ -56,7 +58,8 @@ const Products = ({ match }) => {
       alert.error(error);
       dispatch(clearErrors());
     }
-
+    console.log(category);
+    if (category === 'All') setCategory('')
     dispatch(getProduct(keyword, currentPage, price, category, ratings));
   }, [dispatch, keyword, currentPage, price, category, ratings, alert, error]);
 
@@ -93,7 +96,9 @@ const Products = ({ match }) => {
                 <li
                   className="category-link"
                   key={category}
-                  onClick={() => setCategory(category)}
+                  onClick={() => {
+                    setCategory(category === 'All' ? '': category)
+                  }}
                 >
                   {category}
                 </li>

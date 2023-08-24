@@ -70,6 +70,14 @@ const ProductDetails = ({ match }) => {
   };
 
   const reviewSubmitHandler = () => {
+
+    // Check if the comment is empty
+    if (comment.trim() === '') {
+      alert.error("Please provide a comment before submitting the review.");
+      return;
+    }
+
+
     const myForm = new FormData();
 
     myForm.set("rating", rating);

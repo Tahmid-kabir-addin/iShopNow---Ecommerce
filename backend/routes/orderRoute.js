@@ -6,7 +6,8 @@ const {
   getAllOrders,
   updateOrder,
   deleteOrder,
-  getAllOrdersSupplier
+  getAllOrdersSupplier,
+  getTotalOrdersForDate,
 } = require("../controllers/orderController");
 const router = express.Router();
 
@@ -24,11 +25,15 @@ router
 
 router
   .route("/supplier/orders")
-  .get(isAuthenticatedUser, authorizeRoles("supplier"), getAllOrdersSupplier);
+  .get(isAuthenticatedUser, authorizeRoles("supplier"), getAllOrders);
 
 router
   .route("/admin/order/:id")
   .put(isAuthenticatedUser, authorizeRoles("admin"), updateOrder)
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteOrder);
+
+router 
+  .route("/total-orders/:date")
+  .get(isAuthenticatedUser, authorizeRoles("admin", "supplier"), getTotalOrdersForDate);
 
 module.exports = router;

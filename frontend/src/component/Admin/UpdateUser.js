@@ -112,7 +112,7 @@ const UpdateUser = ({ history, match }) => {
                   <option value="">Choose Role</option>
                   <option value="admin">Admin</option>
                   <option value="user">User</option>
-                  <option value="supplier">User</option>
+                  <option value="supplier">Staff</option>
                 </select>
               </div>
 
