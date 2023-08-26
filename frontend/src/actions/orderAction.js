@@ -91,7 +91,7 @@ export const getAllOrdersSupplier = () => async (dispatch) => {
   }
 };
 
-// Update Order
+// Update Order -- admin
 export const updateOrder = (id, order) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_ORDER_REQUEST });
@@ -116,7 +116,48 @@ export const updateOrder = (id, order) => async (dispatch) => {
   }
 };
 
-// Delete Order
+// Update Order -- supplier
+export const updateOrderSupplier = (id, order) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_ORDER_REQUEST });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const { data } = await axios.put(
+      `/api/v1/supplier/order/${id}`,
+      order,
+      config
+    );
+
+    dispatch({ type: UPDATE_ORDER_SUCCESS, payload: data.success });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_ORDER_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Delete Order -- supplier
+export const deleteOrderSupplier = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: DELETE_ORDER_REQUEST });
+
+    const { data } = await axios.delete(`/api/v1/supplier/order/${id}`);
+
+    dispatch({ type: DELETE_ORDER_SUCCESS, payload: data.success });
+  } catch (error) {
+    dispatch({
+      type: DELETE_ORDER_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Delete Order -- admin
 export const deleteOrder = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_ORDER_REQUEST });

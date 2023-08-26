@@ -2,19 +2,19 @@ import React, { Fragment, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import "./productList.css";
 import { useSelector, useDispatch } from "react-redux";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAlert } from "react-alert";
-// import { Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import MetaData from "../layout/MetaData";
-// import EditIcon from "@material-ui/icons/Edit";
-// import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 import SideBar from "./Sidebar";
 import {
-  // deleteOrder,
+  deleteOrderSupplier,
   getAllOrdersSupplier,
   clearErrors,
 } from "../../actions/orderAction";
-// import { DELETE_ORDER_RESET } from "../../constants/orderConstants";
+import { DELETE_ORDER_RESET } from "../../constants/orderConstants";
 
 const OrderList = ({ history }) => {
   const dispatch = useDispatch();
@@ -23,11 +23,11 @@ const OrderList = ({ history }) => {
 
   const { error, orders } = useSelector((state) => state.allOrders);
   // console.log('orders', orders);
-  // const { error: deleteError, isDeleted } = useSelector((state) => state.order);
+  const { error: deleteError, isDeleted } = useSelector((state) => state.order);
 
-  // const deleteOrderHandler = (id) => {
-  //   dispatch(deleteOrder(id));
-  // };
+  const deleteOrderHandler = (id) => {
+    dispatch(deleteOrderSupplier(id));
+  };
 
   useEffect(() => {
     if (error) {
@@ -35,16 +35,16 @@ const OrderList = ({ history }) => {
       dispatch(clearErrors());
     }
 
-    // if (deleteError) {
-    //   alert.error(deleteError);
-    //   dispatch(clearErrors());
-    // }
+    if (deleteError) {
+      alert.error(deleteError);
+      dispatch(clearErrors());
+    }
 
-    // if (isDeleted) {
-    //   alert.success("Order Deleted Successfully");
-    //   history.push("/admin/orders");
-    //   dispatch({ type: DELETE_ORDER_RESET });
-    // }
+    if (isDeleted) {
+      alert.success("Order Deleted Successfully");
+      history.push("/supplier/orders");
+      dispatch({ type: DELETE_ORDER_RESET });
+    }
 
     dispatch(getAllOrdersSupplier());
   }, [dispatch, alert, error, history]);
@@ -79,31 +79,31 @@ const OrderList = ({ history }) => {
       flex: 0.5,
     },
 
-    // {
-    //   field: "actions",
-    //   flex: 0.3,
-    //   headerName: "Actions",
-    //   minWidth: 150,
-    //   type: "number",
-    //   sortable: false,
-    //   renderCell: (params) => {
-    //     return (
-    //       <Fragment>
-    //         {/* <Link to={`/admin/order/${params.getValue(params.id, "id")}`}>
-    //           <EditIcon />
-    //         </Link>
+    {
+      field: "actions",
+      flex: 0.3,
+      headerName: "Actions",
+      minWidth: 150,
+      type: "number",
+      sortable: false,
+      renderCell: (params) => {
+        return (
+          <Fragment>
+            <Link to={`/supplier/order/${params.getValue(params.id, "id")}`}>
+              <EditIcon />
+            </Link>
 
-    //         <Button
-    //           onClick={() =>
-    //             deleteOrderHandler(params.getValue(params.id, "id"))
-    //           }
-    //         >
-    //           <DeleteIcon />
-    //         </Button> */}
-    //       </Fragment>
-    //     );
-    //   },
-    // },
+            <Button
+              onClick={() =>
+                deleteOrderHandler(params.getValue(params.id, "id"))
+              }
+            >
+              <DeleteIcon />
+            </Button>
+          </Fragment>
+        );
+      },
+    },
   ];
 
   const rows = [];

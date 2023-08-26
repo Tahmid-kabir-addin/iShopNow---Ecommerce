@@ -32,6 +32,11 @@ router
   .put(isAuthenticatedUser, authorizeRoles("admin"), updateOrder)
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteOrder);
 
+router
+  .route("/supplier/order/:id")
+  .put(isAuthenticatedUser, authorizeRoles("supplier"), updateOrder)
+  .delete(isAuthenticatedUser, authorizeRoles("supplier"), deleteOrder);
+
 router 
   .route("/total-orders/:date")
   .get(isAuthenticatedUser, authorizeRoles("admin", "supplier"), getTotalOrdersForDate);

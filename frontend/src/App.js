@@ -46,6 +46,7 @@ import SupplierNewProduct from "./component/Supplier/NewProduct.js";
 import SupplierUpdateProduct from "./component/Supplier/UpdateProduct";
 import SupplierProductReviews from "./component/Supplier/ProductReviews";
 import SupplierOrderList from "./component/Supplier/OrderList";
+import SupplierProcessOrder from "./component/Supplier/ProcessOrder";
 
 import Contact from "./component/layout/Contact/Contact";
 import About from "./component/layout/About/About";
@@ -219,7 +220,12 @@ function App() {
           isSupplier={true}
           component={SupplierNewProduct}
         />
-
+        <ProtectedRoute
+          exact
+          path="/supplier/order/:id"
+          isSupplier={true}
+          component={SupplierProcessOrder}
+        />
         <ProtectedRoute
           exact
           path="/supplier/product/:id"
