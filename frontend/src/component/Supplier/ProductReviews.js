@@ -74,7 +74,7 @@ const SupplierProductReviews = ({ history }) => {
     {
       field: "comment",
       headerName: "Comment",
-      minWidth: 350,
+      minWidth: 200,
       flex: 1,
     },
 
@@ -92,27 +92,27 @@ const SupplierProductReviews = ({ history }) => {
       },
     },
 
-    {
-      field: "actions",
-      flex: 0.3,
-      headerName: "Actions",
-      minWidth: 150,
-      type: "number",
-      sortable: false,
-      renderCell: (params) => {
-        return (
-          <Fragment>
-            <Button
-              onClick={() =>
-                deleteReviewHandler(params.getValue(params.id, "id"))
-              }
-            >
-              <DeleteIcon />
-            </Button>
-          </Fragment>
-        );
-      },
-    },
+    // {
+    //   field: "actions",
+    //   flex: 0.3,
+    //   headerName: "Actions",
+    //   minWidth: 150,
+    //   type: "number",
+    //   sortable: false,
+    //   renderCell: (params) => {
+    //     return (
+    //       <Fragment>
+    //         <Button
+    //           onClick={() =>
+    //             deleteReviewHandler(params.getValue(params.id, "id"))
+    //           }
+    //         >
+    //           <DeleteIcon />
+    //         </Button>
+    //       </Fragment>
+    //     );
+    //   },
+    // },
   ];
 
   const rows = [];
