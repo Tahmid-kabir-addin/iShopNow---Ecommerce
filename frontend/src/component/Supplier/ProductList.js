@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   clearErrors,
   getSupplierProduct,
-  deleteProduct,
+  deleteProductSupplier,
 } from "../../actions/productAction";
 import { Link } from "react-router-dom";
 import { useAlert } from "react-alert";
@@ -28,7 +28,7 @@ const SupplierProductList = ({ history }) => {
   );
 
   const deleteProductHandler = (id) => {
-    dispatch(deleteProduct(id));
+    dispatch(deleteProductSupplier(id));
   };
 
   useEffect(() => {
