@@ -10,19 +10,23 @@ import { useAlert } from "react-alert";
 import Typography from "@material-ui/core/Typography";
 import MetaData from "../layout/MetaData";
 
-const categories = [
-  "All",
-  "Laptop",
-  "Desktop",
-  "Monitor",
-  "Office Equipment",
-  "Accessories",
-  "Camera",
-  "Phone",
-  "Gaming",
-];
+// const categories = [
+//   "All",
+//   "Laptop",
+//   "Desktop",
+//   "Monitor",
+//   "Office Equipment",
+//   "Accessories",
+//   "Camera",
+//   "Phone",
+//   "Gaming",
+// ];
+
 
 const Products = ({ match }) => {
+  const categories = useSelector((state) => state.categories.categories);
+  console.log(categories);
+
   const dispatch = useDispatch();
 
   const alert = useAlert();
@@ -89,7 +93,11 @@ const Products = ({ match }) => {
               min={0}
               max={90000}
             />
-
+            <div className="sliderValues">
+                
+              <span>{`Min: $${price[0]}`}</span>
+              <span>{`Max: $${price[1]}`}</span>
+            </div>
             <Typography>Categories</Typography>
             <ul className="categoryBox">
               {categories.map((category) => (
@@ -97,7 +105,7 @@ const Products = ({ match }) => {
                   className="category-link"
                   key={category}
                   onClick={() => {
-                    setCategory(category === 'All' ? '': category)
+                    setCategory(category === 'All' ? '' : category)
                   }}
                 >
                   {category}
@@ -117,6 +125,9 @@ const Products = ({ match }) => {
                 min={0}
                 max={5}
               />
+              <div className="sliderValues">
+                <span>{`Ratings: ${ratings}`}</span>
+              </div>
             </fieldset>
           </div>
           {resultPerPage < count && (

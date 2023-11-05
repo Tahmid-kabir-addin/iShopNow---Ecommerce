@@ -15,8 +15,10 @@ import SpellcheckIcon from "@material-ui/icons/Spellcheck";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import SideBar from "./Sidebar";
 import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
+import { updateCategories } from "../../actions/categoryActions";
 
 const UpdateProduct = ({ history, match }) => {
+
   const dispatch = useDispatch();
   const alert = useAlert();
 
@@ -37,16 +39,20 @@ const UpdateProduct = ({ history, match }) => {
   const [oldImages, setOldImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
-  const categories = [
-    "Laptop",
-    "Desktop",
-    "Monitor",
-    "Office Equipment",
-    "Accessories",
-    "Camera",
-    "Phone",
-    "Gaming",
-  ];
+  // const categories = [
+  //   "Laptop",
+  //   "Desktop",
+  //   "Monitor",
+  //   "Office Equipment",
+  //   "Accessories",
+  //   "Camera",
+  //   "Phone",
+  //   "Gaming",
+  // ];
+  // const categories = useSelector((state) => state.categories.categories);
+  const categories = useSelector((state) => state.categories.categories);
+  // console.log(categories);
+  const [newCategory, setNewCategory] = useState("");
 
   const productId = match.params.id;
 
@@ -101,6 +107,15 @@ const UpdateProduct = ({ history, match }) => {
     images.forEach((image) => {
       myForm.append("images", image);
     });
+
+    if (category === "addCategory" && newCategory.trim() !== "") {
+      const updatedCategories = [...categories, newCategory.trim()];
+      dispatch(updateCategories(updatedCategories));
+      myForm.set("category", newCategory.trim());
+    } else {
+      myForm.set("category", category);
+    }
+
     dispatch(updateProduct(productId, myForm));
   };
 
@@ -183,7 +198,16 @@ const UpdateProduct = ({ history, match }) => {
                     {cate}
                   </option>
                 ))}
+                <option value="addCategory">Add Category</option>
               </select>
+              {category === "addCategory" && (
+                <input
+                  type="text"
+                  // placeholder="New Category"
+                  value={newCategory}
+                  onChange={(e) => setNewCategory(e.target.value)}
+                />
+              )}
             </div>
 
             <div>

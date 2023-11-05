@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { ReactNavbar } from "overlay-navbar";
 import logo from "../../../images/logo1.png";
 import { AiOutlineShoppingCart, AiOutlineUser, AiOutlineSearch } from 'react-icons/ai'
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+
 const options = {
   burgerColorHover: "#eb4034",
   logo,
@@ -51,6 +53,18 @@ const options = {
 };
 
 const Header = () => {
+  const history = useHistory()
+  const [isSearchExpanded, setIsSearchExpanded] = useState(true);
+  const [searchInput, setSearchInput] = useState("");
+  const handleSearch = (e) => {
+    // e.preventDefault();
+    if (searchInput.trim()) {
+      history.push(`/products/${searchInput}`);
+      // NavigationPreloadManager()
+    } else {
+      history.push("/products");
+    }
+  }
   // return <ReactNavbar {...options} />;
   const { cartItems } = useSelector((state) => state.cart)
   const { isAuthenticated, user } = useSelector((state) => state.user)
@@ -84,11 +98,45 @@ const Header = () => {
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                   </a> */}
-                  <a className="hover:text-gray-200" href="/search">
+                  {/* <a className="hover:text-gray-200" href="/search">
+                    <svg className="cursor-pointer bi bi-search" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" fill="white"></path>
+                    </svg>
+                  </a> */}
+                  <a
+                    className="hover:text-gray-200"
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleSearch()
+                    }}
+                  >
                     <svg className="cursor-pointer bi bi-search" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                       <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" fill="white"></path>
                     </svg>
                   </a>
+                  <div
+                    className={`${isSearchExpanded ? "w-64" : "w-12"
+                      } transition-all overflow-hidden flex items-center bg-white ${isSearchExpanded ? "pl-4 pr-2" : ""
+                      }`}
+                  >
+                    <input
+                      type="text"
+                      placeholder="Search..."
+                      value={searchInput}
+                      onChange={(e) => setSearchInput(e.target.value)}
+                      className="bg-transparent outline-none border-0 p-2 m-0 flex-grow"
+                    />
+                    {/* Search button */}
+                    <button
+                      className="text-gray-600 hover:text-gray-800 focus:outline-none"
+                      onClick={() => {
+                        // Implement your search functionality here using the searchInput state.
+                      }}
+                    >
+                      {/* Search icon SVG */}
+                    </button>
+                  </div>
 
                   <a className="flex items-center hover:text-gray-200" href="/cart">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

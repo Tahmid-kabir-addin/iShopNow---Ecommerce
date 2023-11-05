@@ -1,0 +1,9 @@
+.cartButton {
+    background-color: toamto;
+    border-radius: 15px 5px;
+    cursor: pointer;
+    color: white;
+    padding: 10px;
+    /* width: 200px; */
+    font: 3rem;
+}

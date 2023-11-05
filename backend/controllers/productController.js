@@ -50,7 +50,11 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
     .filter();
 
   let products = await apiFeature.query;
-
+  console.log(products);
+  // const inStockProducts = products.filter(product => {
+  //   product.Stock > 0
+  // })
+  // products = inStockProducts
   let filteredProductsCount = products.length;
 
   apiFeature.pagination(resultPerPage);
