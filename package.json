@@ -11,7 +11,6 @@
     "start": "node backend/server.js",
     "dev": "nodemon backend/server.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
-
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +18,7 @@
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.37.3",
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
