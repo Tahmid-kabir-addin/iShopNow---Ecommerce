@@ -1,5 +1,7 @@
 # iShopNow
 
+For more details about this project Please read this: [iShopNow - Report](https://drive.google.com/file/d/1xXHuRnDhyZQUEIuMp_qtVwb38xbr7fyW/view?usp=drive_link)
+
 ## Install Dependencies
 For Backend - npm i
 
